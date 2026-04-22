@@ -11,7 +11,7 @@ from report import print_ioc_report
 # ──────────────────────────────────────────────
 
 # Délai entre chaque requête (évite le rate-limiting ngrok)
-DELAY_BETWEEN_REQUESTS = 1.5  # secondes
+DELAY_BETWEEN_REQUESTS = 16  # secondes
 
 # Timeout par requête vers l'API
 REQUEST_TIMEOUT = 600  # secondes
@@ -196,7 +196,7 @@ def print_confusion_matrix(y_true: list[str], y_pred: list[str]):
 def print_report(metrics: dict, metrics_by_type: dict, stats: dict):
     sep = "=" * 60
     print(f"\n{sep}")
-    print("  RAPPORT D'ÉVALUATION — RAG + Gemma")
+    print("  RAPPORT D'ÉVALUATION — RAG + phi3-mini")
     print(sep)
     print(f"  Date       : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"  Total IOC  : {stats['total']}")
@@ -337,7 +337,7 @@ def evaluate(dataset_path: str, api_url: str, output_path: str):
 # ──────────────────────────────────────────────
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Évaluation RAG + Gemma — Cybersécurité PFE")
+    parser = argparse.ArgumentParser(description="Évaluation RAG + phi3mini — Cybersécurité PFE")
     parser.add_argument("--dataset", required=True,  help="Chemin vers le fichier JSON du dataset de test")
     parser.add_argument("--url",     required=True,  help="URL de base de l'API (ex: http://xxxx.ngrok.io)")
     parser.add_argument("--output",  default="resultats_eval.json", help="Fichier de sortie JSON")
