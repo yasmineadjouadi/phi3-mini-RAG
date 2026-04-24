@@ -1,12 +1,12 @@
-from fastapi import APIRouter, Query, HTTPException
+from fastapi import APIRouter, Query, HTTPException, Depends
 from services.ip_service import check_ip_reputation
+from services.auth_service import get_current_user
 import ipaddress
 from sqlalchemy.orm import Session
-from fastapi import Depends
 from database.db import get_db
 from database.models import IPReputation
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(get_current_user)])
 
 @router.get("/", summary="IP Reputation Check")
 def ip_route(

@@ -1,9 +1,10 @@
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Depends
 from services.domain_service import get_domain_report
+from services.auth_service import get_current_user
 from fastapi.responses import JSONResponse
 import json
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(get_current_user)])
 @router.get("/")
 def domain_lookup(
     param: str = Query(..., description="Domain name to enrich")

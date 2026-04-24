@@ -3,7 +3,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 logger      = logging.getLogger(__name__)
-LLM_API_URL = os.getenv("LLM_API_URL", "")
+LLM_API_URL = os.getenv("LLM_API_URL", "").rstrip("/")
+
+
+def set_llm_api_url(url: str) -> None:
+    """Met à jour l’URL du tunnel ngrok / Colab en mémoire (après édition du .env)."""
+    global LLM_API_URL
+    LLM_API_URL = (url or "").strip().rstrip("/")
 
 
 # ── Elle reçoit juste raw_data qui est déjà collecté, et elle reformate ce dict pour l'envoyer au LLM ─────────────────────────
